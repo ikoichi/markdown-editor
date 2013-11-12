@@ -1,7 +1,7 @@
 '''
 Created on 08/nov/2013
 
-@author: restaglu
+@author: <luca.restagno@gmail.com>
 '''
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *

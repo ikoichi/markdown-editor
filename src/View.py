@@ -1,16 +1,14 @@
 '''
 Created on 05/nov/2013
 
-@author: restaglu
+@author: <luca.restagno@gmail.com>
 '''
 
-import MarkdownHighlighter, Constants
+import MarkdownHighlighter, Constants, Model, Controller
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from PyQt4.QtWebKit import QWebView
 from PyQt4.QtCore import pyqtSlot,SIGNAL,SLOT
-import Model
-import Controller
 
 class myTextEdit(QtGui.QTextEdit):
         

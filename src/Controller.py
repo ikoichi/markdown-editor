@@ -1,7 +1,7 @@
 '''
 Created on 05/nov/2013
 
-@author: restaglu
+@author: <luca.restagno@gmail.com>
 '''
 import markdown, Constants
 from PyQt4 import QtCore

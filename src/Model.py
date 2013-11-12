@@ -1,7 +1,7 @@
 '''
 Created on 05/nov/2013
 
-@author: restaglu
+@author: <luca.restagno@gmail.com>
 '''
 import json, Constants
 
