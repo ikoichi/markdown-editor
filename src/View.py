@@ -171,50 +171,50 @@ class View(QtGui.QMainWindow):
         
         self.newAction = QtGui.QAction(QtGui.QIcon('images/document-new.png'), '&New', self)
         self.newAction.setShortcut('Ctrl+N')
-        self.newAction.setStatusTip('New')
+        self.newAction.setStatusTip('New (Ctrl+N)')
         
         self.openAction = QtGui.QAction(QtGui.QIcon('images/document-open.png'), '&Open', self)
         self.openAction.setShortcut('Ctrl+O')
-        self.openAction.setStatusTip('Open file')
+        self.openAction.setStatusTip('Open file (Ctrl+O)')
         
         self.saveAction = QtGui.QAction(QtGui.QIcon('images/document-save.png'), '&Save', self)
         self.saveAction.setDisabled(True)
         self.saveAction.setShortcut('Ctrl+S')
-        self.saveAction.setStatusTip('Save')
+        self.saveAction.setStatusTip('Save (Ctrl+S)')
         
         self.exportHTMLAction = QtGui.QAction(QtGui.QIcon('images/export-html.gif'), '&Export to HTML', self)
         self.exportHTMLAction.setDisabled(True)
         self.exportHTMLAction.setShortcut('Ctrl+H')
-        self.exportHTMLAction.setStatusTip('Export to HTML')
+        self.exportHTMLAction.setStatusTip('Export to HTML (Ctrl+H)')
         
         self.viewInBrowserAction = QtGui.QAction(QtGui.QIcon('images/internet-web-browser.png'), '&Browser preview', self)
         self.viewInBrowserAction.setDisabled(True)
         self.viewInBrowserAction.setShortcut('Ctrl+P')
-        self.viewInBrowserAction.setStatusTip('Browser preview')
+        self.viewInBrowserAction.setStatusTip('Browser preview (Ctrl+P)')
         
         self.exitAction = QtGui.QAction(QtGui.QIcon('images/application-exit.png'), '&Exit', self)        
         self.exitAction.setShortcut('Alt+F4')
-        self.exitAction.setStatusTip('Exit application')
+        self.exitAction.setStatusTip('Exit application (Alt+F4)')
         self.exitAction.triggered.connect(QtGui.qApp.quit)
         
         self.boldAction = QtGui.QAction(QtGui.QIcon('images/format-text-bold.png'), '&Bold', self)        
         self.boldAction.setShortcut('Ctrl+B')
-        self.boldAction.setStatusTip('Bold')
+        self.boldAction.setStatusTip('Bold (Ctrl+B)')
         self.boldAction.triggered.connect(self.text_make_bold)
         
         self.italicAction = QtGui.QAction(QtGui.QIcon('images/format-text-italic.png'), '&Italic', self)        
         self.italicAction.setShortcut('Ctrl+I')
-        self.italicAction.setStatusTip('Italic')
+        self.italicAction.setStatusTip('Italic (Ctrl+I)')
         self.italicAction.triggered.connect(self.text_make_italic)
         
         self.quoteAction = QtGui.QAction(QtGui.QIcon('images/quote-left.png'), '&Quote', self)        
         self.quoteAction.setShortcut('Ctrl+Q')
-        self.quoteAction.setStatusTip('Quotes')
+        self.quoteAction.setStatusTip('Quotes (Ctrl+Q)')
         self.quoteAction.triggered.connect(self.text_make_quote)
         
         self.codeAction = QtGui.QAction(QtGui.QIcon('images/code.png'), '&Code', self)        
         self.codeAction.setShortcut('Ctrl+K')
-        self.codeAction.setStatusTip('Code')
+        self.codeAction.setStatusTip('Code (Ctrl+K)')
         self.codeAction.triggered.connect(self.text_make_code)
         
         self.toolbar = self.addToolBar('File actions')
@@ -252,6 +252,11 @@ class View(QtGui.QMainWindow):
         fileMenu.insertSeparator(self.exitAction)
         
         actionsMenu = menubar.addMenu('&Actions')
+        actionsMenu.addAction(self.boldAction)
+        actionsMenu.addAction(self.italicAction)
+        actionsMenu.addAction(self.quoteAction)
+        actionsMenu.addAction(self.codeAction)
+        actionsMenu.insertSeparator(self.exportHTMLAction)
         actionsMenu.addAction(self.exportHTMLAction)
         actionsMenu.addAction(self.viewInBrowserAction)
         
