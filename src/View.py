@@ -9,8 +9,8 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from PyQt4.QtWebKit import QWebView
 from PyQt4.QtCore import pyqtSlot,SIGNAL,SLOT
-from MarkdownEditor import Model
-from MarkdownEditor import Controller
+import Model
+import Controller
 
 class myTextEdit(QtGui.QTextEdit):
         
