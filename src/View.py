@@ -22,7 +22,7 @@ class myTextEdit(QtGui.QTextEdit):
         step = scrollbar.pageStep() / 10
 
         document_h = self.document().size().height()
-        
+
         preview = self.preview
         h = preview.page().mainFrame().contentsSize().height()
 
@@ -201,6 +201,14 @@ class View(QtGui.QMainWindow):
         self.showInFolderAction.setDisabled(True)
         self.showInFolderAction.setShortcut('Ctrl+F')
         self.showInFolderAction.setStatusTip('Open file folder ('+self.ctrlText+'+F)')
+
+        self.exitAction = QtGui.QAction(QtGui.QIcon('images/application-exit.png'), '&Exit', self)
+        self.viewInBrowserAction.setStatusTip('Browser preview (Ctrl+P)')
+
+        self.showInFolderAction = QtGui.QAction(QtGui.QIcon('images/folder-move.png'), '&Open file folder', self)
+        self.showInFolderAction.setDisabled(True)
+        self.showInFolderAction.setShortcut('Ctrl+F')
+        self.showInFolderAction.setStatusTip('Open file folder (Ctrl+F)')
 
         self.exitAction = QtGui.QAction(QtGui.QIcon('images/application-exit.png'), '&Exit', self)
         self.exitAction.setShortcut('Alt+F4')
@@ -397,3 +405,14 @@ class View(QtGui.QMainWindow):
             subprocess.Popen(["open", path])
         else:
             subprocess.Popen(["xdg-open", path])
+
+def main():
+
+    app = QtGui.QApplication([])
+    model = Model.Model()
+    view = View()
+    controller = Controller.Controller(view, model)
+    app.exec_()
+
+if __name__ == '__main__':
+    main()
