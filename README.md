@@ -33,11 +33,15 @@ The Markdown icons in the reference are from the [dcurtis/markdown-mark](https:/
 ### How to run on Windows
 
 * Download the zip and extract it.
-* Open a prompt with command `cmd.exe` 
+* Open a prompt with command `cmd.exe`
 * Go to the folder you extracted markdown-editor to.
 * Run the program `C:\Python27\python.exe MarkdownEditor.py` (or use directly `python.exe` command if it is in your `PATH` variable)
 
 ### How to run on Mac / Unix
 
 The steps are the same as for Windows, finally run `python MarkdownEditor.py`
+* Run the program `C:\Python27\python.exe View.py` (or use directly `python.exe` command if it is in your `PATH` variable)
 
+### How to run on Mac / Unix
+
+The steps are the same as for Windows, finally run `python View.py`
