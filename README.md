@@ -28,3 +28,16 @@ It has been run and tested on Windows 7 but the python implementation permits to
 The icons used in the application are from the [Faenza GNOME Icon Theme](http://gnome-look.org/content/show.php?content=128143) and [Fontawesome](http://fontawesome.io/) project
 
 The Markdown icons in the reference are from the [dcurtis/markdown-mark](https://github.com/dcurtis/markdown-mark) project
+
+
+### How to run on Windows
+
+* Download the zip and extract it.
+* Open a prompt with command `cmd.exe` 
+* Go to the folder you extracted markdown-editor to.
+* Run the program `C:\Python27\python.exe View.py` (or use directly `python.exe` command if it is in your `PATH` variable)
+
+### How to run on Mac / Unix
+
+The steps are the same as for Windows, finally run `python View.py`
+
