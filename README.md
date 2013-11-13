@@ -45,3 +45,7 @@ The steps are the same as for Windows, finally run `python MarkdownEditor.py`
 ### How to run on Mac / Unix
 
 The steps are the same as for Windows, finally run `python View.py`
+
+### How to run on Mac / Unix
+
+The steps are the same as for Windows, finally run `python MarkdownEditor.py`

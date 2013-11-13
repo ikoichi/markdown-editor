@@ -405,14 +405,3 @@ class View(QtGui.QMainWindow):
             subprocess.Popen(["open", path])
         else:
             subprocess.Popen(["xdg-open", path])
-
-def main():
-
-    app = QtGui.QApplication([])
-    model = Model.Model()
-    view = View()
-    controller = Controller.Controller(view, model)
-    app.exec_()
-
-if __name__ == '__main__':
-    main()
