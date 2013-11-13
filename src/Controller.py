@@ -26,6 +26,7 @@ class Controller():
         self.VIEW.saveAction.triggered.connect(self.save_file)
         self.VIEW.exportHTMLAction.triggered.connect(self.export_html)
         self.VIEW.viewInBrowserAction.triggered.connect(self.preview_in_browser)
+        self.VIEW.showInFolderAction.triggered.connect(self.open_folder)
         self.VIEW.preferencesAction.triggered.connect(self.show_preferences)
         self.VIEW.syntaxAction.triggered.connect(self.open_references)
         self.VIEW.browserButton.clicked.connect(self.select_browser)
@@ -69,9 +70,11 @@ class Controller():
         if self.MODEL.FILE_PATH == "":
             self.VIEW.exportHTMLAction.setDisabled(True)
             self.VIEW.viewInBrowserAction.setDisabled(True)
+            self.VIEW.showInFolderAction.setDisabled(True)
         else:
             self.VIEW.exportHTMLAction.setDisabled(False)
             self.VIEW.viewInBrowserAction.setDisabled(False)
+            self.VIEW.showInFolderAction.setDisabled(False)
         
         
     @pyqtSlot(int)
@@ -83,6 +86,9 @@ class Controller():
         self.VIEW.show_preferences()
         browser_name = self.MODEL.get_browser_name()
         self.VIEW.browserLineEdit.setText(browser_name)
+        
+    def open_folder(self):
+        self.VIEW.open_folder(self.MODEL.get_file_folder( self.MODEL.FILE_PATH ))
         
     def select_browser(self):
         self.VIEW.prefs.close()
@@ -149,6 +155,7 @@ class Controller():
             self.VIEW.saveAction.setDisabled(False)
             self.VIEW.exportHTMLAction.setDisabled(False)
             self.VIEW.viewInBrowserAction.setDisabled(False)
+            self.VIEW.showInFolderAction.setDisabled(False)
         
         self.refresh_recent_documents()
         
@@ -173,6 +180,7 @@ class Controller():
                 self.VIEW.update_status('Document saved to ' + self.MODEL.FILE_PATH)
                 self.VIEW.exportHTMLAction.setDisabled(False)
                 self.VIEW.viewInBrowserAction.setDisabled(False)
+                self.VIEW.showInFolderAction.setDisabled(False)
                 self.VIEW.tabs.setTabText( self.MODEL.ACTIVE_TAB, self.MODEL.get_file_name( file_path ) ) 
                 
                 self.refresh_recent_documents()

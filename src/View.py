@@ -9,6 +9,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from PyQt4.QtWebKit import QWebView
 from PyQt4.QtCore import pyqtSlot,SIGNAL,SLOT
+import os, platform, subprocess
 
 class myTextEdit(QtGui.QTextEdit):
         
@@ -190,6 +191,11 @@ class View(QtGui.QMainWindow):
         self.viewInBrowserAction.setShortcut('Ctrl+P')
         self.viewInBrowserAction.setStatusTip('Browser preview (Ctrl+P)')
         
+        self.showInFolderAction = QtGui.QAction(QtGui.QIcon('images/folder-move.png'), '&Open file folder', self)
+        self.showInFolderAction.setDisabled(True)
+        self.showInFolderAction.setShortcut('Ctrl+F')
+        self.showInFolderAction.setStatusTip('Open file folder (Ctrl+F)')
+        
         self.exitAction = QtGui.QAction(QtGui.QIcon('images/application-exit.png'), '&Exit', self)        
         self.exitAction.setShortcut('Alt+F4')
         self.exitAction.setStatusTip('Exit application (Alt+F4)')
@@ -231,6 +237,7 @@ class View(QtGui.QMainWindow):
         
         self.toolbar3.addAction(self.exportHTMLAction)
         self.toolbar3.addAction(self.viewInBrowserAction)
+        self.toolbar3.addAction(self.showInFolderAction)
         
         
         menubar = self.menuBar()
@@ -257,6 +264,7 @@ class View(QtGui.QMainWindow):
         actionsMenu.insertSeparator(self.exportHTMLAction)
         actionsMenu.addAction(self.exportHTMLAction)
         actionsMenu.addAction(self.viewInBrowserAction)
+        actionsMenu.addAction(self.showInFolderAction)
         
         toolsMenu = menubar.addMenu('&Tools')
         
@@ -369,7 +377,16 @@ class View(QtGui.QMainWindow):
         QtGui.QMessageBox.warning(self, "Alert", "The file does not exist")
         
     def dialog_about(self):
-        QtGui.QMessageBox.about(self, "About", "Markdown Editor version "+Constants.VERSION+"<br>Author: "+Constants.AUTHOR)
+        QtGui.QMessageBox.about(self, "About", "<b>Markdown Editor</b><br>version "+Constants.VERSION+"<br><br>Author: "+Constants.AUTHOR+"<br><br>License: "+Constants.LICENSE)
+        
+    def open_folder(self, path):
+        print "open folder: "+ str(path)
+        if platform.system() == "Windows":
+            os.startfile(path)
+        elif platform.system() == "Darwin":
+            subprocess.Popen(["open", path])
+        else:
+            subprocess.Popen(["xdg-open", path])
 
 def main():
     
