@@ -56,6 +56,12 @@ class View(QtGui.QMainWindow):
         super(View, self).__init__()
         
         _widget = QtGui.QWidget()
+
+        self.isMac = False
+        self.ctrlText = 'Ctrl'
+        if platform.system() == "Darwin":
+            self.isMac = True
+            self.ctrlText = 'Cmd'
         
         self.initUI(_widget)
         
@@ -170,31 +176,31 @@ class View(QtGui.QMainWindow):
         
         self.newAction = QtGui.QAction(QtGui.QIcon('images/document-new.png'), '&New', self)
         self.newAction.setShortcut('Ctrl+N')
-        self.newAction.setStatusTip('New (Ctrl+N)')
+        self.newAction.setStatusTip('New ('+self.ctrlText+'+N)')
         
         self.openAction = QtGui.QAction(QtGui.QIcon('images/document-open.png'), '&Open', self)
         self.openAction.setShortcut('Ctrl+O')
-        self.openAction.setStatusTip('Open file (Ctrl+O)')
+        self.openAction.setStatusTip('Open file ('+self.ctrlText+'+O)')
         
         self.saveAction = QtGui.QAction(QtGui.QIcon('images/document-save.png'), '&Save', self)
         self.saveAction.setDisabled(True)
         self.saveAction.setShortcut('Ctrl+S')
-        self.saveAction.setStatusTip('Save (Ctrl+S)')
+        self.saveAction.setStatusTip('Save ('+self.ctrlText+'+S)')
         
         self.exportHTMLAction = QtGui.QAction(QtGui.QIcon('images/export-html.gif'), '&Export to HTML', self)
         self.exportHTMLAction.setDisabled(True)
         self.exportHTMLAction.setShortcut('Ctrl+H')
-        self.exportHTMLAction.setStatusTip('Export to HTML (Ctrl+H)')
+        self.exportHTMLAction.setStatusTip('Export to HTML ('+self.ctrlText+'+H)')
         
         self.viewInBrowserAction = QtGui.QAction(QtGui.QIcon('images/internet-web-browser.png'), '&Browser preview', self)
         self.viewInBrowserAction.setDisabled(True)
         self.viewInBrowserAction.setShortcut('Ctrl+P')
-        self.viewInBrowserAction.setStatusTip('Browser preview (Ctrl+P)')
+        self.viewInBrowserAction.setStatusTip('Browser preview ('+self.ctrlText+'+P)')
         
         self.showInFolderAction = QtGui.QAction(QtGui.QIcon('images/folder-move.png'), '&Open file folder', self)
         self.showInFolderAction.setDisabled(True)
         self.showInFolderAction.setShortcut('Ctrl+F')
-        self.showInFolderAction.setStatusTip('Open file folder (Ctrl+F)')
+        self.showInFolderAction.setStatusTip('Open file folder ('+self.ctrlText+'+F)')
         
         self.exitAction = QtGui.QAction(QtGui.QIcon('images/application-exit.png'), '&Exit', self)        
         self.exitAction.setShortcut('Alt+F4')
@@ -203,22 +209,26 @@ class View(QtGui.QMainWindow):
         
         self.boldAction = QtGui.QAction(QtGui.QIcon('images/format-text-bold.png'), '&Bold', self)        
         self.boldAction.setShortcut('Ctrl+B')
-        self.boldAction.setStatusTip('Bold (Ctrl+B)')
+        self.boldAction.setStatusTip('Bold ('+self.ctrlText+'+B)')
         self.boldAction.triggered.connect(self.text_make_bold)
         
         self.italicAction = QtGui.QAction(QtGui.QIcon('images/format-text-italic.png'), '&Italic', self)        
         self.italicAction.setShortcut('Ctrl+I')
-        self.italicAction.setStatusTip('Italic (Ctrl+I)')
+        self.italicAction.setStatusTip('Italic ('+self.ctrlText+'+I)')
         self.italicAction.triggered.connect(self.text_make_italic)
         
-        self.quoteAction = QtGui.QAction(QtGui.QIcon('images/quote-left.png'), '&Quote', self)        
-        self.quoteAction.setShortcut('Ctrl+Q')
-        self.quoteAction.setStatusTip('Quotes (Ctrl+Q)')
+        self.quoteAction = QtGui.QAction(QtGui.QIcon('images/quote-left.png'), '&Quote', self)
+        if self.isMac is True:
+            self.quoteAction.setShortcut('Ctrl+G')
+            self.quoteAction.setStatusTip('Quotes ('+self.ctrlText+'+G)')
+        else:
+            self.quoteAction.setShortcut('Ctrl+Q')
+            self.quoteAction.setStatusTip('Quotes ('+self.ctrlText+'+Q)')
         self.quoteAction.triggered.connect(self.text_make_quote)
         
         self.codeAction = QtGui.QAction(QtGui.QIcon('images/code.png'), '&Code', self)        
         self.codeAction.setShortcut('Ctrl+K')
-        self.codeAction.setStatusTip('Code (Ctrl+K)')
+        self.codeAction.setStatusTip('Code ('+self.ctrlText+'+K)')
         self.codeAction.triggered.connect(self.text_make_code)
         
         self.toolbar = self.addToolBar('File actions')
@@ -342,7 +352,7 @@ class View(QtGui.QMainWindow):
         return unicode(inputEdit.toPlainText())
         
     def select_file(self):
-        fname = QtGui.QFileDialog.getOpenFileName(self, 'Select file', "*.md", "Markdown .md")
+        fname = QtGui.QFileDialog.getOpenFileName(self, 'Select file', "", "*.md")
         print( "Selected file: " + fname )
         if fname:
             return fname
@@ -350,7 +360,7 @@ class View(QtGui.QMainWindow):
             return False
         
     def save_file_picker(self):
-        fname = QtGui.QFileDialog.getSaveFileName(self, 'Save file', "*.md", "Markdown .md")
+        fname = QtGui.QFileDialog.getSaveFileName(self, 'Save file', "", "*.md")
         print( "Selected file: " + fname )
         if fname:
             return fname
@@ -358,7 +368,7 @@ class View(QtGui.QMainWindow):
             return False
         
     def select_browser(self):
-        fname = QtGui.QFileDialog.getOpenFileName(self, 'Select browser', "*.exe", "Executable")
+        fname = QtGui.QFileDialog.getOpenFileName(self, 'Select browser', "", "*.exe")
         if fname:
             return fname
         else:
