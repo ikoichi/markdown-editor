@@ -54,7 +54,12 @@ class Controller():
         
         preview = self.VIEW.active_preview() 
         y = preview.page().mainFrame().scrollPosition().y()
-        preview.setContent( "<style>"+self.MODEL.base_css +"</style>" + html )
+        data =QtCore.QString("<style>")
+        data.append(QtCore.QString(self.MODEL.base_css))
+        data.append("</style>")
+        data.append(QtCore.QString(html))
+        #data = QtCore.QByteArray("<style>"+ +"</style>" + html)
+        preview.setContent( data.toUtf8() )
         
         preview.scroll(0, y)
         preview.page().mainFrame().scroll(0, y)
