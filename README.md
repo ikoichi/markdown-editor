@@ -22,7 +22,7 @@ Dependencies:
 * pyQt4
 * markdown
 
-It has been run and tested on Windows 7 but the python implementation permits to run the software on any platform. Please, let me know if you encounter problems.
+The editor has been run and tested on Windows 7 but the python implementation allows to run the software on any platforms. Please, let me know if you encounter problems.
 
 ### Attributions
 The icons used in the application are from the [Faenza GNOME Icon Theme](http://gnome-look.org/content/show.php?content=128143) and [Fontawesome](http://fontawesome.io/) project
@@ -33,6 +33,13 @@ The Markdown icons in the reference are from the [dcurtis/markdown-mark](https:/
 ### How to run on Windows
 
 * Download the zip and extract it.
+* Open a prompt with command `cmd.exe`
+#### Installer
+Download and installe the release Windows installer.
+
+#### Using the repo
+
+* Download the repo zip and extract it.
 * Open a prompt with command `cmd.exe`
 * Go to the folder you extracted markdown-editor to.
 * Run the program `C:\Python27\python.exe MarkdownEditor.py` (or use directly `python.exe` command if it is in your `PATH` variable)
