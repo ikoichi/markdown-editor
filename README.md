@@ -35,7 +35,7 @@ The Markdown icons in the reference are from the [dcurtis/markdown-mark](https:/
 * Download the zip and extract it.
 * Open a prompt with command `cmd.exe`
 #### Installer
-Download and installe the release Windows installer.
+Download and install the latest release Windows installer.
 
 #### Using the repo
 
