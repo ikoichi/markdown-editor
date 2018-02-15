@@ -49,17 +49,17 @@ class Controller():
     @pyqtSlot()
     def renderInput(self):
 
-        html = markdown.markdown( unicode(self.VIEW.active_input().toPlainText() ) )
+        plainText = self.VIEW.active_input().toPlainText()
+        html = markdown.markdown( unicode(plainText) )
         self.VIEW.saveAction.setDisabled(False)
 
         preview = self.VIEW.active_preview()
         y = preview.page().mainFrame().scrollPosition().y()
-        data =QtCore.QString("<style>")
+        data = QtCore.QString("<style>")
         data.append(QtCore.QString(self.MODEL.base_css))
         data.append("</style>")
         data.append(QtCore.QString(html))
-        #data = QtCore.QByteArray("<style>"+ +"</style>" + html)
-        preview.setContent( data.toUtf8() )
+        preview.setContent( data.toUtf8(), "text/html; charset=utf-8" )
 
         preview.scroll(0, y)
         preview.page().mainFrame().scroll(0, y)
@@ -135,7 +135,7 @@ class Controller():
         self.VIEW.change_active_tab( self.MODEL.ACTIVE_TAB )
 
     def open_file_path(self, file_path):
-        file_content = self.MODEL.get_file_content(file_path)
+        file_content = self.MODEL.get_file_content_utf8(file_path)
 
         if file_content is False:
             self.VIEW.no_file_alert()
@@ -156,7 +156,7 @@ class Controller():
             inputEdit.css = self.MODEL.get_css()
 
             self.VIEW.change_active_tab( self.MODEL.ACTIVE_TAB )
-            self.VIEW.set_document(file_content)
+            self.VIEW.set_document(unicode(file_content, 'utf-8'))
             self.VIEW.saveAction.setDisabled(False)
             self.VIEW.exportHTMLAction.setDisabled(False)
             self.VIEW.viewInBrowserAction.setDisabled(False)
@@ -179,7 +179,7 @@ class Controller():
             if file_path != False:
                 self.MODEL.FILE_PATH = file_path
                 self.MODEL.save_document_path(file_path)
-                self.MODEL.write_file_content( self.MODEL.FILE_PATH, current_document )
+                self.MODEL.write_file_content_utf8( self.MODEL.FILE_PATH, current_document )
                 self.MODEL.add_recent_document(file_path)
 
                 self.VIEW.update_status('Document saved to ' + self.MODEL.FILE_PATH)
@@ -191,7 +191,7 @@ class Controller():
                 self.refresh_recent_documents()
 
         else:
-            self.MODEL.write_file_content( self.MODEL.FILE_PATH, current_document )
+            self.MODEL.write_file_content_utf8( self.MODEL.FILE_PATH, current_document )
             self.VIEW.update_status('Document saved to ' + self.MODEL.FILE_PATH)
 
     def export_html(self):
@@ -222,6 +222,3 @@ class Controller():
 
     def open_references(self):
         self.open_file_path( Constants.HELP_FILE )
-
-
-        

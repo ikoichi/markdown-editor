@@ -3,7 +3,7 @@ Created on 05/nov/2013
 
 @author: <luca.restagno@gmail.com>
 '''
-import json, Constants
+import json, Constants, codecs
 
 class Model():
     '''
@@ -51,7 +51,10 @@ class Model():
 
     def set_active_tab(self, index):
         self.ACTIVE_TAB = index
-        self.FILE_PATH = self.TABS[ index ]['path']
+        if index > -1:
+            self.FILE_PATH = self.TABS[ index ]['path']
+        else:
+            self.FILE_PATH = ''
 
     def set_document_path(self, file_path):
         self.FILE_PATH = file_path
@@ -82,14 +85,41 @@ class Model():
             f = open(filename, 'r')
             return f.read()
         except Exception:
+            print "get_file_content"
+            return False
+
+    def get_file_content_utf8(self, filename):
+        try:
+            #f = open(filename, 'r')
+            with codecs.open(filename, "r") as f:
+                return f.read()
+        except Exception,e:
+            print "get_file_content_utf8"
+            print str(e)
             return False
 
 
     def write_file_content(self, filename, data):
-        f = open(filename, 'w')
-        f.write( str(data) )
-        f.close()
-        return True
+        try:
+            f = open(filename, 'w')
+            f.write( data )
+            f.close()
+            return True
+        except Exception,e:
+            print "write_file_content"
+            print str(e)
+            return False
+
+    def write_file_content_utf8(self, filename, data):
+        try:
+            with codecs.open(filename, "w", "utf-8") as f:
+                f.write( data )
+                f.close()
+            return True
+        except Exception,e:
+            print "write_file_content_utf8"
+            print str(e)
+            return False
 
     def get_recent_documents(self):
         result = self.get_file_content(Constants.CONFIG_FILE)
@@ -117,7 +147,7 @@ class Model():
         if len(self.RECENT_DOCUMENTS) > 11:
             self.RECENT_DOCUMENTS.pop()
 
-        result = self.get_file_content( Constants.CONFIG_FILE )
+        result = self.get_file_content_utf8( Constants.CONFIG_FILE )
         data = json.loads(result)
         data['recent_documents'] = self.RECENT_DOCUMENTS
 
@@ -147,4 +177,3 @@ class Model():
         data = json.loads(result)
         data[ key ] = value
         self.write_file_content(Constants.CONFIG_FILE, json.dumps(data))
-        

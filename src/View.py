@@ -349,7 +349,8 @@ class View(QtGui.QMainWindow):
 
     def get_current_document_content(self):
         inputEdit = self.active_input()
-        return unicode(inputEdit.toPlainText())
+        plainText = inputEdit.toPlainText()
+        return unicode(plainText)
 
     def select_file(self):
         fname = QtGui.QFileDialog.getOpenFileName(self, 'Select file', "", "*.md")
