@@ -63,7 +63,6 @@ class View(QtGui.QMainWindow):
             self.isMac = True
             self.ctrlText = 'Cmd'
 
-
         self.initUI(_widget)
 
     @pyqtSlot()
@@ -183,42 +182,20 @@ class View(QtGui.QMainWindow):
         self.openAction.setShortcut('Ctrl+O')
         self.openAction.setStatusTip('Open file ('+self.ctrlText+'+O)')
 
-
-        self.openAction = QtGui.QAction(QtGui.QIcon('images/document-open.png'), '&Open', self)
-        self.openAction.setShortcut('Ctrl+O')
-        self.openAction.setStatusTip('Open file ('+self.ctrlText+'+O)')
-
         self.saveAction = QtGui.QAction(QtGui.QIcon('images/document-save.png'), '&Save', self)
         self.saveAction.setDisabled(True)
         self.saveAction.setShortcut('Ctrl+S')
         self.saveAction.setStatusTip('Save ('+self.ctrlText+'+S)')
-
 
         self.exportHTMLAction = QtGui.QAction(QtGui.QIcon('images/export-html.gif'), '&Export to HTML', self)
         self.exportHTMLAction.setDisabled(True)
         self.exportHTMLAction.setShortcut('Ctrl+H')
         self.exportHTMLAction.setStatusTip('Export to HTML ('+self.ctrlText+'+H)')
 
-
         self.viewInBrowserAction = QtGui.QAction(QtGui.QIcon('images/internet-web-browser.png'), '&Browser preview', self)
         self.viewInBrowserAction.setDisabled(True)
         self.viewInBrowserAction.setShortcut('Ctrl+P')
         self.viewInBrowserAction.setStatusTip('Browser preview ('+self.ctrlText+'+P)')
-
-        self.showInFolderAction = QtGui.QAction(QtGui.QIcon('images/folder-move.png'), '&Open file folder', self)
-        self.showInFolderAction.setDisabled(True)
-        self.showInFolderAction.setShortcut('Ctrl+F')
-        self.showInFolderAction.setStatusTip('Open file folder ('+self.ctrlText+'+F)')
-
-        self.exitAction = QtGui.QAction(QtGui.QIcon('images/application-exit.png'), '&Exit', self)
-        self.viewInBrowserAction.setStatusTip('Browser preview (Ctrl+P)')
-
-        self.showInFolderAction = QtGui.QAction(QtGui.QIcon('images/folder-move.png'), '&Open file folder', self)
-        self.showInFolderAction.setDisabled(True)
-        self.showInFolderAction.setShortcut('Ctrl+F')
-        self.showInFolderAction.setStatusTip('Open file folder (Ctrl+F)')
-
-        self.exitAction = QtGui.QAction(QtGui.QIcon('images/application-exit.png'), '&Exit', self)
 
         self.showInFolderAction = QtGui.QAction(QtGui.QIcon('images/folder-move.png'), '&Open file folder', self)
         self.showInFolderAction.setDisabled(True)

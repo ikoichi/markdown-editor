@@ -6,9 +6,9 @@ Created on 13/nov/2013
 
 from PyQt4 import QtGui
 import Model, Controller, View
-    
+
 def main():
-    
+
     app = QtGui.QApplication([])
     model = Model.Model()
     view = View.View()
